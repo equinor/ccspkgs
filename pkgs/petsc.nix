@@ -1,4 +1,19 @@
-{ lib, stdenv, fetchFromGitHub, python3, gfortran, mpi, openssh, blas, lapack, sowing }:
+{
+  lib,
+  stdenv,
+  blas,
+  fetchFromGitHub,
+  gfortran,
+  lapack,
+  hdf5,
+  mpi,
+  openssh,
+  python3,
+  sowing,
+  ptscotch,
+  fblaslapack,
+  hypre,
+}:
 
 stdenv.mkDerivation rec {
   name = "petsc";
@@ -13,28 +28,51 @@ stdenv.mkDerivation rec {
 
   mpiSupport = true;
 
-  nativeBuildInputs = [ python3 gfortran mpi openssh ];
-  buildInputs = [ blas lapack sowing ];
+  nativeBuildInputs = [
+    gfortran
+    mpi
+    openssh
+    python3
+  ];
+
+  buildInputs = [
+    blas
+    lapack
+    sowing
+    hdf5
+    ptscotch
+    fblaslapack
+    hypre
+  ];
 
   preConfigure = ''
     patchShebangs ./lib/petsc/bin
     configureFlagsArray=(
       $configureFlagsArray
-      "--with-mpi=0"
       "--CC=mpicc"
-      "--with-cxx=mpicxx"
-      "--with-fc=mpif90"
-      "--with-mpi=1"
       "--with-blas=1"
-      "--with-lapack=1"
-      "--with-scalar-type=real"
-      "--with-precision=double"
+      "--with-cxx=mpicxx"
       "--with-debugging=0"
+      "--with-fblaslapack=1"
+      "--with-fc=mpif90"
+      "--with-hdf5-fortan-bindings=1"
+      "--with-hdf5=1"
+      "--with-hypre=1"
+      "--with-lapack=1"
+      "--with-mpi=0"
+      "--with-mpi=1"
+      "--with-precision=double"
+      "--with-ptscotch=1"
+      "--with-scalar-type=real"
       COPTFLAGS='-g -O3'
       FOPTFLAGS='-g -O3'
       CXXOPTFLAGS='-g -O3'
     )
   '';
 
-  configureFlags = [ "--CFLAGS=-O3" "--CXXFLAGS=-O3" "--FFLAGS=-O3" ];
+  configureFlags = [
+    "--CFLAGS=-O3"
+    "--CXXFLAGS=-O3"
+    "--FFLAGS=-O3"
+  ];
 }
