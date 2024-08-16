@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub, mpi, gfortran }:
+{ lib, stdenv, fetchFromGitHub, mpi, gfortran, cmake }:
 
 stdenv.mkDerivation rec {
   name = "hypre";
@@ -11,16 +11,9 @@ stdenv.mkDerivation rec {
     hash = "sha256-wZwo52TvSE/jfi32nXCNTQu/E2tyvaj/dXpA4mBvwDQ=";
   };
 
-  nativeBuildInputs = [ gfortran ];
+  nativeBuildInputs = [ gfortran cmake ];
 
   buildInputs = [ mpi ];
 
-  configurePhase = ''
-    pushd src
-    ./configure --with-blas=no --with-lapack=no --host=x86_64-linux-gnu
-    popd
-  '';
-
-  AR = "ar -rcu";
-  makeFlags = [ "-C" "src" ];
+  cmakeDir = "../src";
 }

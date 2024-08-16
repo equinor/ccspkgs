@@ -59,7 +59,6 @@ stdenv.mkDerivation rec {
       "--with-hdf5=1"
       "--with-hypre=1"
       "--with-lapack=1"
-      "--with-mpi=0"
       "--with-mpi=1"
       "--with-precision=double"
       "--with-ptscotch=1"

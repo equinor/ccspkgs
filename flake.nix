@@ -40,6 +40,9 @@
             fblaslapack = pkgs.callPackage ./pkgs/fblaslapack.nix {};
             sowing = pkgs.callPackage ./pkgs/sowing.nix { };
             petsc = pkgs.callPackage ./pkgs/petsc.nix { inherit sowing ptscotch fblaslapack hypre; };
+            pflotran-ogs = pkgs.callPackage ./pkgs/pflotran-ogs.nix { inherit petsc; };
+
+            hdf5-fortran = pkgs.hdf5-fortran;
           };
         };
       flake = {
