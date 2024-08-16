@@ -6,6 +6,7 @@
   gfortran,
   lapack,
   hdf5,
+  hdf5-fortran,
   mpi,
   openssh,
   python3,
@@ -39,7 +40,6 @@ stdenv.mkDerivation rec {
     blas
     lapack
     sowing
-    hdf5
     ptscotch
     fblaslapack
     hypre
@@ -55,8 +55,6 @@ stdenv.mkDerivation rec {
       "--with-debugging=0"
       "--with-fblaslapack=1"
       "--with-fc=mpif90"
-      "--with-hdf5-fortan-bindings=1"
-      "--with-hdf5=1"
       "--with-hypre=1"
       "--with-lapack=1"
       "--with-mpi=1"

@@ -1,4 +1,9 @@
-{ lib, stdenv, fetchFromBitbucket, gfortran }:
+{
+  lib,
+  stdenv,
+  fetchFromBitbucket,
+  gfortran,
+}:
 
 stdenv.mkDerivation rec {
   name = "fblaslapack";
@@ -13,7 +18,10 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ gfortran ];
 
-  makeFlags = ["FOPTFLAGS=-fallow-argument-mismatch" "RM=rm"];
+  makeFlags = [
+    "FOPTFLAGS=-fallow-argument-mismatch"
+    "RM=rm"
+  ];
 
   installPhase = ''
     for f in libfblas.a libflapack.a; do
