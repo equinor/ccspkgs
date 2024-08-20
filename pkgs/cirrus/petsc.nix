@@ -18,13 +18,13 @@
 
 stdenv.mkDerivation rec {
   name = "petsc";
-  version = "3.20.6";
+  version = "3.19.1";
 
   src = fetchFromGitHub {
     owner = "petsc";
     repo = "petsc";
     rev = "v${version}";
-    hash = "sha256-NLSCbsvQNVNZhEGW6FHkNKq6hO+Zpuk2Bv5y0sASAGY=";
+    hash = "sha256-23U4aSnYuX5Q60StTv0RjWzYhSDUj96N0mDHh2ASeFY=";
   };
 
   mpiSupport = true;

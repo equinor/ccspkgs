@@ -34,4 +34,8 @@ stdenv.mkDerivation {
     "FFLAGS=-I${hdf5-fortran.dev}/include"
     "EXTRA_LINK_FLAGS=-L${hdf5-fortran}/lib -lhdf5-fortran"
   ];
+
+  passthru = {
+    inherit petsc;
+  };
 }
